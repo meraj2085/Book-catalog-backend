@@ -1,5 +1,5 @@
 {
-  "name": "Book-catalog-backend",
+  "name": "book-catalog-backend",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.ts",
