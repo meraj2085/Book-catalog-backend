@@ -16,7 +16,10 @@ const signUp = async (data: User) => {
     config.jwt.expires_in as string
   );
 
-  return { user, accessToken };
+  const { password, createdAt, updatedAt, ...userWithoutPassword } = user;
+  console.log(password, createdAt, updatedAt);
+
+  return { user: userWithoutPassword, accessToken };
 };
 
 export const AuthService = {
