@@ -1,4 +1,5 @@
 // import { Order } from '@prisma/client';
+import ApiError from '../../../errors/ApiError';
 import prisma from '../../../shared/prisma';
 
 const createOrder = async (id: string, data: any) => {
@@ -28,12 +29,24 @@ const getAllOrders = async (user: any) => {
   return order;
 };
 
-const getSingleOrder = async (id: string) => {
+const getSingleOrder = async (id: string, user: any) => {
+  const { userId, role } = user;
+  if (role === 'admin') {
+    const order = await prisma.order.findUnique({
+      where: {
+        id,
+      },
+    });
+    return order;
+  }
   const order = await prisma.order.findUnique({
     where: {
       id,
     },
   });
+  if (order?.userId !== userId) {
+    throw new ApiError(403, 'You are not authorized to view this order');
+  }
   return order;
 };
 
