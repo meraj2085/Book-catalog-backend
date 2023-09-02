@@ -6,6 +6,7 @@ import { userRoutes } from '../modules/user/user.routes';
 import { categoryRoutes } from '../modules/category/category.routes';
 import { bookRoutes } from '../modules/books/books.routes';
 import { orderRoutes } from '../modules/order/order.routes';
+import { profileRoutes } from '../modules/profile/profile.routes';
 
 const moduleRoutes = [
   {
@@ -28,6 +29,10 @@ const moduleRoutes = [
     path: '/orders',
     route: orderRoutes,
   },
+  {
+    path: '/profile',
+    route: profileRoutes,
+  }
 ];
 
 moduleRoutes.forEach(route => router.use(route.path, route.route));
